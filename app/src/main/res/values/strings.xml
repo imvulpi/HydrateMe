@@ -3,4 +3,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="daily_goal_text">Daily Goal:</string>
+    <string name="water">0/0</string>
 </resources>
