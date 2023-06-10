@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
-        android:text="@string/water"
+        android:text="0/0"
         android:textAlignment="textEnd"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/view"
@@ -57,8 +57,8 @@
         style="@style/CustomProgressBar"
         android:layout_width="0dp"
         android:layout_height="12dp"
-        android:max="100"
-        android:progress="10"
+        android:max="2100"
+        android:progress="0"
         android:progressDrawable="@drawable/progressbara"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/waterAmount"
@@ -66,4 +66,131 @@
         app:layout_constraintStart_toStartOf="@+id/txtDailyGoal"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.704" />
+
+    <Button
+        android:id="@+id/btnAddWater"
+        android:layout_width="107dp"
+        android:layout_height="64dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/add_water_button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:layout_constraintVertical_bias="0.895" />
+
+    <LinearLayout
+        android:id="@+id/optionsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_background"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddWater"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:layout_constraintVertical_bias="0.905"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/customWaterValue"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editTextNumber"
+                android:layout_width="120dp"
+                android:layout_height="61dp"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/input_water_hint"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/btnAddCustomWater"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:imeOptions="actionNext"
+                android:text="ADD" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/defaultWaterValues"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+            <HorizontalScrollView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/btn100ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="64dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:text="@string/btn_water1" />
+
+                    <Button
+                        android:id="@+id/btn300ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="64dp"
+                        android:layout_margin="3dp"
+                        android:text="@string/btn_water2" />
+
+                    <Button
+                        android:id="@+id/btn600ml"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:text="@string/btn_water3" />
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/elementsLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/optionsLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" >
+
+        <ScrollView
+            android:id="@+id/iconView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layerType="none"
+            tools:ignore="SpeakableTextPresentCheck">
+
+            <LinearLayout
+                android:id="@+id/LinearLadder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

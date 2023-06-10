@@ -3,7 +3,7 @@
     <style name="CustomProgressBar" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:indeterminateDrawable">@drawable/progressbar</item>
     </style>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Change the background color of the app bar -->
         <item name="android:background">@color/main_accent_dark</item>
     </style>

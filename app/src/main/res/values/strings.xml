@@ -3,6 +3,14 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_settings">Settings</string>
     <string name="daily_goal_text">Daily Goal:</string>
     <string name="water">0/0</string>
+    <string name="add_water_button_text">+</string>
+    <string name="btn_water1">100ml</string>
+    <string name="btn_water2">300ml</string>
+    <string name="btn_water3">600ml</string>
+    <string name="input_water_hint">Amount of water</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

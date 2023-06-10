@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/generalSettingsRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="false">
+
+    <RadioGroup
+        android:id="@+id/dateFormatSelection"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="60dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/dmyBtn1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="day/month/year" />
+
+        <RadioButton
+            android:id="@+id/ymdBtn2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="year/month/day" />
+
+        <RadioButton
+            android:id="@+id/mdyBtn3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="month/day/year" />
+    </RadioGroup>
+
+    <ScrollView
+        android:id="@+id/generalSettings"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.609"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/generalSetting_unit"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/unitSettingText"
+                    android:layout_width="240dp"
+                    android:layout_height="64dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:text="Unit of the cups"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/unitChosen"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginRight="20dp"
+                    android:duplicateParentState="false"
+                    android:fontFamily="@font/oswald_medium"
+                    android:gravity="center"
+                    android:text="ml"
+                    android:textColor="@color/main_accent_light"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/unitSettingText"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/generalSetting_dateFormat"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_weight="1"
+                tools:layout_editor_absoluteY="64dp">
+
+                <TextView
+                    android:id="@+id/dateFormatText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="64dp"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center|left"
+                    android:text="Date format"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/dateChosen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="64dp"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/oswald_medium"
+                    android:gravity="center"
+                    android:text="2023.06.06"
+                    android:textColor="@color/main_accent_light"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.876"
+                    app:layout_constraintStart_toEndOf="@+id/dateFormatText"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/generalSetting_Clock"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/clockSystemText"
+                    android:layout_width="240dp"
+                    android:layout_height="64dp"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center|left"
+                    android:text="Clock System"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/clockSystemChosen"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/oswald_medium"
+                    android:gravity="center"
+                    android:text="24h"
+                    android:textColor="@color/main_accent_light"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/clockSystemText"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
