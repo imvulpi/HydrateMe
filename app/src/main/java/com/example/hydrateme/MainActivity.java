@@ -1,18 +1,17 @@
 package com.example.hydrateme;
-
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -34,10 +33,7 @@ import com.example.hydrateme.ui.settings.TermsOfService;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DeviceUtils deviceUtils = new DeviceUtils();
-    private ActivityMainBinding binding;
-    private String sharedPreferencesName = "GlobalConfig";
-
+    private final String sharedPreferencesName = "GlobalConfig";
     private AppDatabase appDatabase;
     public AppDatabase getAppDatabase() {
         if (appDatabase == null) {
@@ -46,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return appDatabase;
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,15 +56,15 @@ public class MainActivity extends AppCompatActivity {
             notificationHelper.scheduleNotification(this, time, "Notification", "This notification");
         }
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        com.example.hydrateme.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         ImageView menuIcon = findViewById(R.id.menu_icon);
         View hidingListener = findViewById(R.id.hideListener);
-        Button dashboardBtn = findViewById(R.id.dashBtn);
-        Button homeBtn = findViewById(R.id.homeBtn);
-        Button notificationBtn = findViewById(R.id.notificationBtn);
-        Button settingsBtn = findViewById(R.id.settingsBtn);
+        RelativeLayout dashboardBtn = findViewById(R.id.dashboardButton);
+        RelativeLayout homeBtn = findViewById(R.id.homeButton);
+        RelativeLayout notificationBtn = findViewById(R.id.notificationButton);
+        RelativeLayout settingsBtn = findViewById(R.id.settingsButton);
 
         menuIcon.setOnClickListener(v ->{
             showSideNavigation();
@@ -85,8 +80,42 @@ public class MainActivity extends AppCompatActivity {
         settingsBtn.setOnClickListener(navBarButtonClickListener);
 
         //  database:
-            appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "AquaDB")
-                .build();
+        appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "AquaDB")
+            .build();
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        System.out.println("Stopped!");
+        SharedPreferences sharedPreferences = getSharedPreferences("TemporaryVariables",Context.MODE_PRIVATE);
+        sharedPreferences.edit().clear().commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_main);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        if (isSettingsFragment(currentFragment)) {
+            if(isOtherSettingsFragment(currentFragment)) {
+                OtherSettingsFragment otherSettingsFragment = new OtherSettingsFragment();
+                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, otherSettingsFragment);
+            }else{
+                SettingsFragment settingsFragment = new SettingsFragment();
+                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, settingsFragment);
+            }
+            fragmentTransaction.commit();
+        } else {
+            if(currentFragment instanceof HomeFragment){
+                super.onBackPressed();
+            }
+            HomeFragment homeFragment = new HomeFragment();
+            fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, homeFragment);
+            fragmentTransaction.commit();
+        }
     }
 
     private View.OnClickListener navBarButtonClickListener = new View.OnClickListener() {
@@ -106,15 +135,16 @@ public class MainActivity extends AppCompatActivity {
             }
 
             int viewId = v.getId();
+            ImageView configIcon = findViewById(R.id.config_icon);
+            configIcon.setVisibility(View.GONE);
 
-
-            if(viewId == R.id.dashBtn) {
+            if(viewId == R.id.dashboardButton) {
                 fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, dashboardFragment);
-            }else if(viewId == R.id.homeBtn){
+            }else if(viewId == R.id.homeButton){
                 fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, homeFragment);
-            }else if(viewId == R.id.notificationBtn){
+            }else if(viewId == R.id.notificationButton){
                 fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, notificationSettingFragment);
-            }else if(viewId == R.id.settingsBtn){
+            }else if(viewId == R.id.settingsButton){
                 fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, settingsFragment);
             }else{
                 fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, homeFragment); //   Default HOME
@@ -128,13 +158,19 @@ public class MainActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment currentFragment = fragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main);
-
+        Animation slideInAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_in);
 
         if(currentFragment instanceof SettingsFragment || currentFragment instanceof HomeFragment || currentFragment instanceof DashboardFragment || currentFragment instanceof NavHostFragment){
-            LinearLayout side_navigation = findViewById(R.id.sideNavBar);
+            ConstraintLayout side_navigation = findViewById(R.id.sideNavBar);
             View hidingListener = findViewById(R.id.hideListener);
+            ImageView menuIco = findViewById(R.id.menu_icon);
+            ImageView configIcon = findViewById(R.id.config_icon);
 
             side_navigation.setVisibility(View.VISIBLE);
+            side_navigation.startAnimation(slideInAnimation);
+            side_navigation.setClickable(true);
+            menuIco.setClickable(false);
+            configIcon.setClickable(false);
             hidingListener.setVisibility(View.VISIBLE);
         }else{
             comeBackToParentFragment(currentFragment);
@@ -152,7 +188,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(isSettingsFragment(currentFragment)){
-            fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, settingsFragment);
+            if(isOtherSettingsFragment(currentFragment)) {
+                OtherSettingsFragment otherSettingsFragment = new OtherSettingsFragment();
+                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, otherSettingsFragment);
+            }else {
+                fragmentTransaction.replace(R.id.nav_host_fragment_activity_main, settingsFragment);
+            }
         }
 
         fragmentTransaction.commit();
@@ -161,11 +202,26 @@ public class MainActivity extends AppCompatActivity {
     private boolean isSettingsFragment(Fragment fragment) {
         return fragment instanceof PrivacyPolicy || fragment instanceof TermsOfService || fragment instanceof FrequentlyAskedQuestions || fragment instanceof GeneralSettingsFragment || fragment instanceof OtherSettingsFragment || fragment instanceof NotificationSettingFragment;
     }
-    public void hideSideNavigation(){
-        LinearLayout side_navigation = findViewById(R.id.sideNavBar);
-        View hidingListener = findViewById(R.id.hideListener);
 
+    private boolean isOtherSettingsFragment(Fragment fragment){
+        return fragment instanceof PrivacyPolicy || fragment instanceof FrequentlyAskedQuestions || fragment instanceof TermsOfService;
+    }
+    public void hideSideNavigation(){
+        Animation slideOutAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_out);
+        ConstraintLayout side_navigation = findViewById(R.id.sideNavBar);
+        View hidingListener = findViewById(R.id.hideListener);
+        ImageView menuIcon = findViewById(R.id.menu_icon);
+        ImageView configIcon = findViewById(R.id.config_icon);
+        menuIcon.setClickable(true);
+        configIcon.setClickable(true);
+
+        side_navigation.startAnimation(slideOutAnimation);
         side_navigation.setVisibility(View.GONE);
         hidingListener.setVisibility(View.GONE);
+    }
+
+    public void setTextViewText(String text) {
+        TextView textView = findViewById(R.id.toolbarText);
+        textView.setText(text);
     }
 }

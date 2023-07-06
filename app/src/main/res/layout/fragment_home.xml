@@ -2,98 +2,263 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/config_setup_card"
+            layout="@layout/configuration_setup"
+            android:elevation="30dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <View
+        android:id="@+id/dimmedView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/background_shadow"
+        android:elevation="30dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/deleteMenuLayout"
+        android:layout_width="320dp"
+        android:layout_height="130dp"
+        android:layout_marginBottom="200dp"
+        android:background="@drawable/rounded_corner_background"
+        android:elevation="32dp"
+        android:orientation="vertical"
+        android:padding="6dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddWater"
+        app:layout_constraintEnd_toEndOf="@+id/elementsLayout"
+        app:layout_constraintStart_toStartOf="@+id/elementsLayout"
+        tools:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/closeImage"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="end"
+                android:padding="12dp"
+                android:src="@drawable/close"
+                app:tint="?attr/iconColor" />
+
+            <TextView
+                android:id="@+id/dateInDelMenu"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="Date of the element"
+                android:textColor="?attr/primaryTextColor"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/cardBackground80alpha" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
+
+            <LinearLayout
+                android:id="@+id/deleteButton"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="0dp"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <Button
+                    android:id="@+id/delete_delmenu"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    android:padding="-12dp"
+                    android:text="Delete"
+                    android:textColor="@color/incorrect_value"
+                    app:iconPadding="0dp" />
+
+                <ImageView
+                    android:id="@+id/trashcanImage"
+                    android:layout_width="0dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/trash"
+                    app:tint="@color/incorrect_value" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/duplicateButton"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/duplicateImage"
+                    android:layout_width="0dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:src="@drawable/clone"
+                    app:tint="?attr/iconColor"/>
+
+                <Button
+                    android:id="@+id/duplicate_delmenu"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    android:outlineProvider="none"
+                    android:padding="-12dp"
+                    android:text="duplicate"
+                    android:textColor="?attr/secondaryTextColor"
+                    app:iconPadding="0dp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/view"
         android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
         android:background="@drawable/rounded_corner_background"
-        android:clickable="false"
-        android:hapticFeedbackEnabled="false"
+        android:elevation="12dp"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/txtDailyGoal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/daily_goal_text"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.16"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.433" />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/CustomProgressBar"
+            android:layout_width="0dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:max="2100"
+            android:progress="0"
+            android:progressDrawable="@drawable/progressbara"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.775" />
 
-    <TextView
-        android:id="@+id/waterAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text="0/0"
-        android:textAlignment="textEnd"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.796"
-        app:layout_constraintStart_toEndOf="@+id/txtDailyGoal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.433"
-        tools:ignore="TextSizeCheck" />
+        <TextView
+            android:id="@+id/waterAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:fontFamily="sans-serif-light"
+            android:text="0/0"
+            android:textAlignment="textEnd"
+            android:textColor="?attr/primaryTextColor"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/progressBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="TextSizeCheck" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@style/CustomProgressBar"
-        android:layout_width="0dp"
-        android:layout_height="12dp"
-        android:max="2100"
-        android:progress="0"
-        android:progressDrawable="@drawable/progressbara"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/waterAmount"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtDailyGoal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.704" />
+        <TextView
+            android:id="@+id/txtDailyGoal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/daily_goal_text"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="?attr/primaryTextColor"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/progressBar"
+            app:layout_constraintEnd_toStartOf="@+id/waterAmount"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/btnAddWater"
-        android:layout_width="107dp"
-        android:layout_height="64dp"
+        android:layout_width="112dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="64dp"
         android:clickable="true"
         android:focusable="true"
         android:text="@string/add_water_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_bias="0.895" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/optionsLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="220dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_corner_background"
+        android:elevation="24dp"
         android:orientation="vertical"
         android:padding="20dp"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/btnAddWater"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_bias="0.905"
-        tools:visibility="visible">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:id="@+id/customWaterValue"
@@ -103,20 +268,25 @@
 
             <EditText
                 android:id="@+id/editTextNumber"
-                android:layout_width="120dp"
-                android:layout_height="61dp"
+                android:layout_width="121dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/input_water_hint"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="?attr/primaryTextColor"
+                android:textColorHighlight="?attr/primaryTextColor"
+                android:textColorHint="?attr/secondaryTextColor" />
 
             <Button
                 android:id="@+id/btnAddCustomWater"
-                android:layout_width="1dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_width="12dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="6dp"
                 android:layout_weight="1"
+                android:foregroundGravity="center"
+                android:gravity="center"
                 android:imeOptions="actionNext"
                 android:text="ADD" />
 
@@ -126,43 +296,121 @@
             android:id="@+id/defaultWaterValues"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
             <HorizontalScrollView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:id="@+id/icons"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_height="65dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp">
 
-                    <Button
-                        android:id="@+id/btn100ml"
-                        android:layout_width="wrap_content"
-                        android:layout_height="64dp"
-                        android:layout_margin="3dp"
+                    <ImageView
+                        android:id="@+id/cup150ml"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="bottom"
                         android:layout_weight="1"
-                        android:text="@string/btn_water1" />
+                        android:foregroundGravity="center_vertical"
+                        android:src="@drawable/teacup_nohandle" />
 
-                    <Button
-                        android:id="@+id/btn300ml"
-                        android:layout_width="wrap_content"
-                        android:layout_height="64dp"
-                        android:layout_margin="3dp"
-                        android:text="@string/btn_water2" />
-
-                    <Button
-                        android:id="@+id/btn600ml"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_margin="3dp"
+                    <ImageView
+                        android:id="@+id/cup250ml"
+                        android:layout_width="64dp"
+                        android:layout_height="48dp"
+                        android:layout_gravity="bottom"
                         android:layout_weight="1"
-                        android:text="@string/btn_water3" />
+                        android:src="@drawable/hot_beverage" />
+
+                    <ImageView
+                        android:id="@+id/cup400ml"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/bubble_tea_cup" />
+
+                    <ImageView
+                        android:id="@+id/cup500ml"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/water_bottle500ml" />
+
+                    <ImageView
+                        android:id="@+id/cup600ml"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/coffe_cup" />
 
                 </LinearLayout>
-            </HorizontalScrollView>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/cupSize150"
+                        android:layout_width="64dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="150 ml"
+                        android:textColor="?attr/primaryTextColor" />
+
+                    <TextView
+                        android:id="@+id/cupSize250"
+                        android:layout_width="64dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="250 ml"
+                        android:textColor="?attr/primaryTextColor" />
+
+                    <TextView
+                        android:id="@+id/cupSize400"
+                        android:layout_width="64dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="400 ml"
+                        android:textColor="?attr/primaryTextColor" />
+
+                    <TextView
+                        android:id="@+id/cupSize500"
+                        android:layout_width="64dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="500 ml"
+                        android:textColor="?attr/primaryTextColor" />
+
+                    <TextView
+                        android:id="@+id/cupSize600"
+                        android:layout_width="64dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="600 ml"
+                        android:textColor="?attr/primaryTextColor" />
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -176,21 +424,23 @@
         app:layout_constraintBottom_toTopOf="@+id/optionsLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" >
+        app:layout_constraintTop_toBottomOf="@+id/view">
 
-        <ScrollView
+        <com.example.hydrateme.SwipeableScrollView
             android:id="@+id/iconView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layerType="none"
-            tools:ignore="SpeakableTextPresentCheck">
+            tools:ignore="SpeakableTextPresentCheck,UselessParent">
 
             <LinearLayout
                 android:id="@+id/LinearLadder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
+                android:orientation="vertical">
+
+            </LinearLayout>
+        </com.example.hydrateme.SwipeableScrollView>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

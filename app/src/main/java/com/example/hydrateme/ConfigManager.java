@@ -37,8 +37,88 @@ public class ConfigManager {
             int hourSystem = 24;
             saveClockFormat(hourSystem);
         }
+
+        if(!sharedPreferences.contains("weight")){
+            float weight = 65;
+            saveWeight(weight);
+        }
+
+        if(!sharedPreferences.contains("activityLevel")){
+            int activity = 2;
+            saveActivity(activity);
+        }
+
+        if(!sharedPreferences.contains("temperature")){
+            int temperature = 15;
+            saveTemperature(temperature);
+        }
+
+        if(!sharedPreferences.contains("adjustment")){
+            float adjustment = 0;
+            saveAdjustment(adjustment);
+        }
+
+        if(!sharedPreferences.contains("weightUnit")){
+            String weightUnit = "kg";
+            saveWeightUnit(weightUnit);
+        }
+
+        if(!sharedPreferences.contains("waterIntakeGoal")){
+            int waterIntakeGoal = 35*63;
+            saveWaterIntakeGoal(waterIntakeGoal);
+        }
+    }
+    public void saveWaterIntakeGoal(int waterIntakeGoal){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("waterIntakeGoal",waterIntakeGoal);
+        editor.apply();
+    }
+    public int getWaterIntakeGoal(){return sharedPreferences.getInt("waterIntakeGoal",35*63);}
+    public void saveWeightUnit(String weightUnit){
+        weightUnit = weightUnit.toLowerCase();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("weightUnit", weightUnit);
+        editor.apply();
     }
 
+    public String getWeightUnit(){return sharedPreferences.getString("weightUnit","kg");}
+
+    public void saveAdjustment(float adjustment){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putFloat("adjustment", adjustment);
+        editor.apply();
+    }
+    public float getAdjustment(){return sharedPreferences.getFloat("adjustment",0);}
+    public void saveTemperature(int temperature){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("temperature", temperature);
+        editor.apply();
+    }
+    public int getTemperature(){return sharedPreferences.getInt("temperature",15);}
+
+    /**
+     * Saves activity level in the shared preferences file
+     * @param activity the level of activity. 1 - Quiet, 2 - Normal, 3 - Active, 4 - Very Active
+     */
+    public void saveActivity(int activity){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        if(activity >= 1 && activity < 5) {
+            editor.putInt("activityLevel", activity);
+            editor.apply();
+        }
+    }
+    public int getActivityLevel(){return sharedPreferences.getInt("activityLevel",2);}
+
+    /**
+    * Saves weight in the shared preferences file
+    * @param weight Weight in kilogram
+    */
+    public void saveWeight(float weight){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putFloat("weight", weight);
+        editor.apply();
+    }
+    public float getWeight(){return sharedPreferences.getFloat("weight",65);}
 
     //  hourSystem The preferred clock format: 24 for 24-hour format, 12 for am/pm format.
     public void saveClockFormat(int hourSystem){

@@ -12,12 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
+
+import com.example.hydrateme.MainActivity;
 import com.example.hydrateme.R;
 import com.example.hydrateme.ConfigManager;
 import java.util.concurrent.TimeUnit;
@@ -37,6 +40,10 @@ public class NotificationSettingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.settings_notifications, container, false);
+
+        MainActivity activity = (MainActivity) getActivity();
+        ImageView menuIcon = activity.findViewById(R.id.menu_icon);
+        menuIcon.setImageResource(R.drawable.arrow);
 
         AudioManager audioManager = (AudioManager) view.getContext().getSystemService(Context.AUDIO_SERVICE);
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences(CONFIG_NAME,Context.MODE_PRIVATE);

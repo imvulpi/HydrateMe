@@ -22,14 +22,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="1. Go to Security"
+            android:textColor="?attr/primaryTextColor"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/popup_notification_step2"
             android:layout_width="wrap_content"
-            android:layout_height="17dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="2. Permissions"
+            android:textColor="?attr/primaryTextColor"
             android:textSize="16sp" />
 
         <TextView
@@ -38,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="3. Allow autostart"
+            android:textColor="?attr/primaryTextColor"
             android:textSize="16sp" />
 
     </LinearLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="cardBackground" format="color"></attr>
+    <attr name="cardBackground80alpha" format="color"></attr>
+    <attr name="primaryTextColor" format="reference|color"></attr>
+    <attr name="secondaryTextColor" format="reference|color"></attr>
+    <attr name="iconColor" format="color"></attr>
+</resources>

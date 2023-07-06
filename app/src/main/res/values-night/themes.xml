@@ -15,5 +15,10 @@
         <item name="android:statusBarColor" tools:targetApi="21">@color/main_accent_dark</item>
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/white</item>
+        <item name="cardBackground">@color/card_color_dark</item>
+        <item name="cardBackground80alpha">@color/card_color_light_80a</item>
+        <item name="primaryTextColor">@color/primary_color_light</item>
+        <item name="secondaryTextColor">@color/secondary_color_light</item>
+        <item name="iconColor">@color/icon_light</item>
     </style>
 </resources>

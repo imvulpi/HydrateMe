@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.hydrateme.MainActivity;
 import com.example.hydrateme.R;
 
 public class OtherSettingsFragment extends Fragment {
@@ -33,6 +35,10 @@ public class OtherSettingsFragment extends Fragment {
         faq.setOnClickListener(handleClick);
         pPolicy.setOnClickListener(handleClick);
         tos.setOnClickListener(handleClick);
+
+        MainActivity activity = (MainActivity) getActivity();
+        ImageView menuIcon = activity.findViewById(R.id.menu_icon);
+        menuIcon.setImageResource(R.drawable.arrow);
 
         return view;
     }

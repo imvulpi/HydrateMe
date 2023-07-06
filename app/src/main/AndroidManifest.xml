@@ -9,6 +9,7 @@
 
     <application
         android:allowBackup="true"
+        android:screenOrientation="portrait"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -17,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HydrateMe"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9498686618801125~4640522662"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -22,7 +22,8 @@
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="20dp"
-                android:text="FAQ" />
+                android:text="FAQ"
+                android:textColor="?attr/primaryTextColor"/>
 
             <TextView
                 android:id="@+id/other_SHARE"
@@ -32,7 +33,8 @@
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="20dp"
-                android:text="Share with friends" />
+                android:text="Share with friends"
+                android:textColor="?attr/primaryTextColor"/>
 
             <TextView
                 android:id="@+id/other_PPOLICY"
@@ -42,7 +44,8 @@
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="20dp"
-                android:text="Privacy policy" />
+                android:text="Privacy policy"
+                android:textColor="?attr/primaryTextColor"/>
 
             <TextView
                 android:id="@+id/other_TOS"
@@ -52,7 +55,8 @@
                 android:clickable="true"
                 android:gravity="center"
                 android:padding="20dp"
-                android:text="Terms of Service" />
+                android:text="Terms of Service"
+                android:textColor="?attr/primaryTextColor"/>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

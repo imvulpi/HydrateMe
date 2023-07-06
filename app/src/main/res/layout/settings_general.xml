@@ -10,36 +10,41 @@
     <RadioGroup
         android:id="@+id/dateFormatSelection"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="60dp"
-        android:background="@color/white"
+        android:layout_marginBottom="120dp"
+        android:background="@drawable/rounded_corner_background"
         android:gravity="center"
+        android:padding="32dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
 
         <RadioButton
             android:id="@+id/dmyBtn1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="day/month/year" />
+            android:text="day/month/year"
+            android:textColor="?attr/primaryTextColor" />
 
         <RadioButton
             android:id="@+id/ymdBtn2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="year/month/day" />
+            android:text="year/month/day"
+            android:textColor="?attr/primaryTextColor" />
 
         <RadioButton
             android:id="@+id/mdyBtn3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="month/day/year" />
+            android:text="month/day/year"
+            android:textColor="?attr/primaryTextColor" />
     </RadioGroup>
 
     <ScrollView
@@ -72,6 +77,7 @@
                     android:layout_weight="1"
                     android:gravity="center|left"
                     android:text="Unit of the cups"
+                    android:textColor="?attr/primaryTextColor"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -109,6 +115,7 @@
                     android:layout_marginLeft="20dp"
                     android:gravity="center|left"
                     android:text="Date format"
+                    android:textColor="?attr/primaryTextColor"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -145,6 +152,7 @@
                     android:layout_marginLeft="20dp"
                     android:gravity="center|left"
                     android:text="Clock System"
+                    android:textColor="?attr/primaryTextColor"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

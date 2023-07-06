@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.hydrateme.ConfigManager;
+import com.example.hydrateme.MainActivity;
 import com.example.hydrateme.R;
 import java.util.Calendar;
 
@@ -35,6 +37,10 @@ public class GeneralSettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.settings_general, container, false);
+
+        MainActivity activity = (MainActivity) getActivity();
+        ImageView menuIcon = activity.findViewById(R.id.menu_icon);
+        menuIcon.setImageResource(R.drawable.arrow);
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("GlobalConfig", Context.MODE_PRIVATE);
         ConfigManager configManager = new ConfigManager(sharedPreferences);

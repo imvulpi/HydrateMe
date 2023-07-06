@@ -1,62 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="270dp"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
     android:gravity="fill"
     android:orientation="vertical">
 
     <!-- Add your navigation options here, such as TextViews or ImageViews -->
     <!-- Set click listeners for each option -->
 
+    <View
+        android:id="@+id/hideListener"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#4D000000"
+        android:clickable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/constraintLayout"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:id="@+id/constraintLayout"
+        android:layout_width="270dp"
         android:layout_height="match_parent"
         android:layout_gravity="fill|top"
-        android:foregroundGravity="top">
+        android:background="?attr/cardBackground"
+        android:foregroundGravity="top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/settingsBtn"
-            android:layout_width="260dp"
+        <View
+            android:id="@+id/view2"
+            android:layout_width="wrap_content"
             android:layout_height="70dp"
-            android:text="@string/title_settings"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/notificationBtn"
-            app:layout_constraintVertical_bias="0.038" />
-
-        <Button
-            android:id="@+id/homeBtn"
-            android:layout_width="260dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="120dp"
-            android:text="@string/title_home"
+            android:background="@color/main_accent_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/dashBtn"
-            android:layout_width="260dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="200dp"
-            android:text="@string/title_dashboard"
+        <RelativeLayout
+            android:id="@+id/homeButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="48dp"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/view2">
 
-        <Button
-            android:id="@+id/notificationBtn"
-            android:layout_width="260dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="280dp"
-            android:text="@string/title_notifications"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/waterDropImage"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:padding="12dp"
+                app:srcCompat="@drawable/water_drop"
+                app:tint="?attr/iconColor" />
+
+            <TextView
+                android:id="@+id/homeText_sideNavigation"
+                android:layout_width="190dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:width="190dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center|left"
+                android:text="@string/home_button_text"
+                android:textColor="?attr/primaryTextColor" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/dashboardButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/homeButton">
+
+            <ImageView
+                android:id="@+id/imageOfDashboard"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                app:srcCompat="@drawable/bar_chart"
+                app:tint="?attr/iconColor" />
+
+            <TextView
+                android:id="@+id/dashboardText_sideNavigation"
+                android:layout_width="190dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:width="190dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center|left"
+                android:text="@string/graphs_button_text"
+                android:textColor="?attr/primaryTextColor" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/settingsButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/dashboardButton">
+
+            <ImageView
+                android:id="@+id/gearImage"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                app:srcCompat="@drawable/gear"
+                app:tint="?attr/iconColor" />
+
+            <TextView
+                android:id="@+id/settingsText_sideNavigation"
+                android:layout_width="190dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:width="190dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center|left"
+                android:text="@string/title_settings"
+                android:textColor="?attr/primaryTextColor" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/notificationButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/settingsButton">
+
+            <ImageView
+                android:id="@+id/bellImage"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                app:srcCompat="@drawable/bell"
+                app:tint="?attr/iconColor" />
+
+            <TextView
+                android:id="@+id/notificationText_sideNavigation"
+                android:layout_width="190dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
+                android:width="190dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center|left"
+                android:text="@string/title_notifications"
+                android:textColor="?attr/primaryTextColor" />
+        </RelativeLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

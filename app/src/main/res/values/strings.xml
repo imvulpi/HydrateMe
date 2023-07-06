@@ -11,6 +11,11 @@
     <string name="btn_water2">300ml</string>
     <string name="btn_water3">600ml</string>
     <string name="input_water_hint">Amount of water</string>
+    <string name="delete_menu">Menu Date</string>
+    <string name="toolbar_text">Main Page</string>
+    <string name="config_title">Configuration</string>
+    <string name="home_button_text">Drink!</string>
+    <string name="graphs_button_text">Graphs</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

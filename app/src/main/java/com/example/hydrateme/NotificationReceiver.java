@@ -29,7 +29,7 @@ public class NotificationReceiver extends BroadcastReceiver {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "9091");
             builder.setContentTitle("Hydration Notification")
                     .setContentText("Drink water to stay hydrated.")
-                    .setSmallIcon(R.drawable.water_bottle)
+                    .setSmallIcon(R.drawable.bottle_water_universal)
                     .setAutoCancel(true); // Automatically remove the notification when clicked
 
             builder.setContentIntent(pendingIntent);
@@ -44,7 +44,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
             builder.setContentTitle("Hydration Notification")
                     .setContentText("Drink water to stay hydrated.")
-                    .setSmallIcon(R.drawable.water_bottle)
+                    .setSmallIcon(R.drawable.bottle_water_universal)
                     .setAutoCancel(true); // Automatically remove the notification when clicked
 
             Notification notification = builder.build();

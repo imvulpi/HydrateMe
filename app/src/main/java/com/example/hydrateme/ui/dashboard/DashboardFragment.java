@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.hydrateme.MainActivity;
+import com.example.hydrateme.R;
 import com.example.hydrateme.databinding.FragmentDashboardBinding;
 
 public class DashboardFragment extends Fragment {
@@ -26,6 +29,11 @@ public class DashboardFragment extends Fragment {
 
         final TextView textView = binding.textDashboard;
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        MainActivity activity = (MainActivity) getActivity();
+        ImageView menuIcon = activity.findViewById(R.id.menu_icon);
+        menuIcon.setImageResource(R.drawable.menu);
+
         return root;
     }
 

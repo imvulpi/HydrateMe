@@ -10,8 +10,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 
+import com.example.hydrateme.MainActivity;
 import com.example.hydrateme.R;
 
 /**
@@ -49,6 +51,10 @@ public class SettingsFragment extends Fragment {
         settingGeneral.setOnClickListener(settingListener);
         settingNotification.setOnClickListener(settingListener);
         settingOther.setOnClickListener(settingListener);
+
+        MainActivity activity = (MainActivity) getActivity();
+        ImageView menuIcon = activity.findViewById(R.id.menu_icon);
+        menuIcon.setImageResource(R.drawable.menu);
 
         return view;
     }
