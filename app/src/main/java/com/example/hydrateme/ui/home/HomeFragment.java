@@ -483,28 +483,9 @@ public class HomeFragment extends Fragment implements View.OnTouchListener {
     }
     public void deleteWaterData(View v){
         ViewGroup parentView = (ViewGroup) v.getParent();
-        ProgressBar waterProgressBar = view.findViewById(R.id.progressBar);
-        TextView waterAmountText = view.findViewById(R.id.waterAmount);
-
         Object tagObject = v.getTag();
         String tag = String.valueOf(tagObject);
         int intValue = Integer.parseInt(tag); // 300
-
-        String progressText = waterAmountText.getText().toString();
-        String[] progress = progressText.split("/");
-        int progressNumber;
-        try {
-            progressNumber = Integer.parseInt(progress[0]);
-        }catch(NumberFormatException e){
-            progressNumber = -1;
-        }
-
-        if(progressNumber == -1) {
-            waterAmountText.setText("Undefined - something went wrong :(");
-        }else {
-            progressNumber = progressNumber - intValue;
-            changeProgress(progressNumber,-1);
-        }
 
         System.out.println("Removing view with tag: " + tag);
         parentView.removeView(v);
@@ -521,6 +502,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener {
         }catch (InterruptedException e){
             System.out.println("INTERRUPTED EXCEPTION: "+ e);
         }
+
         ClearIcons(view);
         RetrieveFromSavedData(accessingDate);
     }
