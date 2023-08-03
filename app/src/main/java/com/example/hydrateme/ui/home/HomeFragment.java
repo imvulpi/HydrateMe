@@ -788,10 +788,10 @@ public class HomeFragment extends Fragment implements View.OnTouchListener {
         String dateTime;
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             // For API level 26 and higher, DateTimeFormatter is better
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd/HH:mm");
             dateTime = LocalDateTime.now().format(formatter);
         }else{
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd/HH:mm");
             dateTime = dateFormat.format(new Date());
         }
         return dateTime;
@@ -849,7 +849,6 @@ public class HomeFragment extends Fragment implements View.OnTouchListener {
         ProgressBar waterProgressBar = view.findViewById(R.id.progressBar);
         CountDownLatch latch = new CountDownLatch(1);
 
-
         CreateElement(waterAmount);
         String dateTime = accessingDate;
 
@@ -895,7 +894,7 @@ public class HomeFragment extends Fragment implements View.OnTouchListener {
             executor.shutdown();
         } else {
             // For API levels below 26, use SimpleDateFormat
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd/HH:mm", Locale.getDefault());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd/HH:mm");
             String dateTime = dateFormat.format(new Date());
             System.out.println("Adding data\nDATE: "+dateTime+" Value: "+amountOfWater);
 

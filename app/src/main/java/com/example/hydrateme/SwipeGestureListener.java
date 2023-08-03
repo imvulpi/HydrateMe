@@ -95,7 +95,7 @@ public class SwipeGestureListener extends GestureDetector.SimpleOnGestureListene
             Date resultDate = calendar.getTime();
             Log.d("Calculations","Result date: "+resultDate);
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd/HH:mm");
             String formattedDate = dateFormat.format(resultDate);
             System.out.println("Formatted date: " + formattedDate);
 
@@ -121,7 +121,7 @@ public class SwipeGestureListener extends GestureDetector.SimpleOnGestureListene
     private void onSwipeRight(Date resultDate) {
         System.out.println("Swiped right");
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd/HH:mm");
         String formattedDate = dateFormat.format(resultDate);
 
         System.out.println("Formatted date: "+ formattedDate);

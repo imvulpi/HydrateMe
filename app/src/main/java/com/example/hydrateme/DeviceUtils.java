@@ -20,5 +20,7 @@ public class DeviceUtils {
         display.getMetrics(displayMetrics);
         return displayMetrics.heightPixels;
     }
+
+
 }
 
