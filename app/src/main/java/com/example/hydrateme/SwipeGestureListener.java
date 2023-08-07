@@ -56,20 +56,8 @@ public class SwipeGestureListener extends GestureDetector.SimpleOnGestureListene
 
         if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > SWIPE_THRESHOLD
                 && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(new Date());
             if (diffX > 0) {
-                System.out.println("Direction before: "+direction);
-                direction = direction - 1;
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putInt("direction", direction);
-                editor.apply();
-                System.out.println("Direction after: "+direction);
-
-                calendar.add(Calendar.DAY_OF_YEAR, direction);
-                Date resultDate = calendar.getTime();
-                Log.d("Calculations","Result date: "+resultDate);
-                onSwipeRight(resultDate);
+                onSwipeRight();
             } else {
                 onSwipeLeft();
             }
@@ -118,7 +106,20 @@ public class SwipeGestureListener extends GestureDetector.SimpleOnGestureListene
         }
     }
 
-    private void onSwipeRight(Date resultDate) {
+    private void onSwipeRight() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        System.out.println("Direction before: "+direction);
+        direction = direction - 1;
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("direction", direction);
+        editor.apply();
+        System.out.println("Direction after: "+direction);
+
+        calendar.add(Calendar.DAY_OF_YEAR, direction);
+        Date resultDate = calendar.getTime();
+        Log.d("Calculations","Result date: "+resultDate);
+
         System.out.println("Swiped right");
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd/HH:mm");

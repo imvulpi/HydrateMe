@@ -1,4 +1,6 @@
 package com.example.hydrateme.ui.dashboard;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +20,9 @@ import com.example.hydrateme.R;
 import com.example.hydrateme.database.AppDatabase;
 import com.example.hydrateme.database.DataModel;
 import com.example.hydrateme.LineGraphView;
+
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -29,19 +34,28 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import kotlin.UInt;
+import kotlin.UnsignedKt;
+
 public class DashboardFragment extends Fragment {
 
     private View view;
     private AppDatabase appDatabase;
+    private int directionGraphs;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("TemporaryVariables", Context.MODE_PRIVATE);
+        directionGraphs = sharedPreferences.getInt("directionGraph",0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         MainActivity activity = (MainActivity) getActivity();
         ImageView menuIcon = activity.findViewById(R.id.menu_icon);
         menuIcon.setImageResource(R.drawable.menu);
         ImageView arrowLeft = view.findViewById(R.id.arrowLeft_graph);
         ImageView arrowRight = view.findViewById(R.id.arrowRight_graph);
-
+        TextView days7 = view.findViewById(R.id.daysCount7);
+        TextView days30 = view.findViewById(R.id.daysCount30);
+        TextView days90 = view.findViewById(R.id.daysCount90);
 
         MainActivity mainActivity = (MainActivity) getActivity();
         if (mainActivity != null) {
@@ -55,28 +69,73 @@ public class DashboardFragment extends Fragment {
             System.out.println("MAIN ACTIVITY is null");
         }
 
+        arrowRight.setOnClickListener(v -> {
+            directionGraphs++;
+            editor.putInt("directionGraph",directionGraphs);
+            editor.apply();
+            setupGraph(directionGraphs);
+        });
 
-        setupGraph();
+        arrowLeft.setOnClickListener(v -> {
+            directionGraphs--;
+            editor.putInt("directionGraph",directionGraphs);
+            editor.apply();
+            setupGraph(directionGraphs);
+        });
+
+        days7.setOnClickListener(v -> {saveDaysAccounted(7);});
+
+        days30.setOnClickListener(v -> {saveDaysAccounted(30);});
+
+        days90.setOnClickListener(v -> {saveDaysAccounted(90);});
+
+        setupGraph(directionGraphs);
 
         return view;
     }
 
-    private void setupGraph(){
-        final int daysAccounted = 7;
-        List<Float> values = retrieveValues(daysAccounted);
-        LineGraphView graphView = view.findViewById(R.id.lineGraphView);
+    private void saveDaysAccounted(@NonNull int number){
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("TemporaryVariables", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("daysAccounted", number);
+        editor.apply();
+        setupGraph(directionGraphs);
+    }
+    private void setupGraph(int directionSize){
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("TemporaryVariables", Context.MODE_PRIVATE);
+        final int daysAccounted = sharedPreferences.getInt("daysAccounted",7);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
 
-        float biggestValue = 0;
-        for (int i = 0; i < values.size(); i++) {
-            if(values.get(i) > biggestValue){
-                biggestValue = values.get(i);
-            }
+        if(directionSize <= 0) {
+            calendar.add(Calendar.DAY_OF_YEAR, directionSize * daysAccounted);
+        }else{
+            directionGraphs = 0;
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("directionGraph", 0);
+            editor.apply();
         }
 
+        List<Float> values = retrieveValues(daysAccounted, calendar);
+        LineGraphView graphView = view.findViewById(R.id.lineGraphView);
+        float biggestValue = getBiggestValue(values);
+        setGraphValues(biggestValue);
+        graphView.setData(values);
+    }
+    public float getBiggestValue(@NonNull List<Float> floats){
+        float biggestValue = 0;
+        for (int i = 0; i < floats.size(); i++) {
+            if(floats.get(i) > biggestValue){
+                biggestValue = floats.get(i);
+            }
+        }
+        return biggestValue;
+    }
+    public void setGraphValues(float biggestValue){
         int[] ids = {R.id.vGraphValue1,R.id.vGraphValue2,R.id.vGraphValue3,R.id.vGraphValue4,R.id.vGraphValue5,R.id.vGraphValue6,R.id.vGraphValue7};
         for(int i = 0; i < 7; i++){
             int textValue = (int)(i * (biggestValue / 6));
-            Log.d("Value Checker","Text value "+i+" is "+textValue);
+            //Log.d("Value Checker","Text value "+i+" is "+textValue);
             try {
                 TextView tvEdit = view.findViewById(ids[i]);
                 if(i == 0){
@@ -89,40 +148,24 @@ public class DashboardFragment extends Fragment {
             }
         }
 
-        graphView.setData(values);
-    }
-    public String getCurrentDate(){
-        String dateTime;
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            // For API level 26 and higher, DateTimeFormatter is better
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd/HH:mm");
-            dateTime = LocalDateTime.now().format(formatter);
-        }else{
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd/HH:mm");
-            dateTime = dateFormat.format(new Date());
-        }
-        return dateTime;
     }
 
-    public List<Float> retrieveValues(int daysAccounted){
+    public List<Float> retrieveValues(int daysAccounted, Calendar date){
         List<Float> values = new ArrayList<Float>();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd/HH:mm");
         CountDownLatch latch = new CountDownLatch(1);
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         executorService.execute(() -> {
             for (int i = 0; daysAccounted > i; i++) {
-                Calendar calendarDate = Calendar.getInstance();
-                calendarDate.setTime(new Date());
-                calendarDate.add(Calendar.DAY_OF_YEAR, -i);
-                Log.d("Graph Init", "Getting data from date: " + dateFormat.format(calendarDate.getTime()));
+                date.add(Calendar.DAY_OF_YEAR, -i);
+                //Log.d("Graph Init", "Getting data from date: " + dateFormat.format(date.getTime()));
 
-                int finalI = i;
-                List<DataModel> data = appDatabase.myDataDao().getByDate(dateFormat.format(calendarDate.getTime()));
+                List<DataModel> data = appDatabase.myDataDao().getByDate(dateFormat.format(date.getTime()));
                 float totalValue = 0;
                 for (DataModel model : data) {
                     int value = model.getValue();
                     totalValue += value;
-                    Log.d("Value Checker", "Value: " + value);
+                    //Log.d("Value Checker", "Value: " + value);
                 }
                 values.add(totalValue);
             }
@@ -134,6 +177,7 @@ public class DashboardFragment extends Fragment {
         }catch (InterruptedException e){
             Log.d("Error","Interrupted "+e);
         }
+
         return values;
     }
 }

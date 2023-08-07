@@ -10,13 +10,13 @@
         android:id="@+id/constraintLayout4"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="260dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/rounded_corner_background"
         android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <com.example.hydrateme.LineGraphView
             android:id="@+id/lineGraphView"
@@ -177,22 +177,26 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
+        android:id="@+id/controlPanel_graph"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/arrowLeft_graph"
             android:layout_width="16dp"
-            android:layout_height="32dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:clickable="true"
+            android:padding="6dp"
             android:src="@drawable/arrow_left"
-            app:tint="?attr/iconColor" />
+            app:tint="?attr/iconColor"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/date_graph"
@@ -206,11 +210,55 @@
         <ImageView
             android:id="@+id/arrowRight_graph"
             android:layout_width="16dp"
-            android:layout_height="32dp"
+            android:layout_height="52dp"
             android:layout_weight="1"
             android:clickable="true"
+            android:padding="6dp"
             android:src="@drawable/arrow_right"
-            app:tint="?attr/iconColor" />
+            app:tint="?attr/iconColor"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/controlPanel_graph">
+
+        <TextView
+            android:id="@+id/daysCount7"
+            android:layout_width="10dp"
+            android:layout_height="52dp"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/box_outline"
+            android:gravity="center"
+            android:text=" 7 days" />
+
+        <TextView
+            android:id="@+id/daysCount30"
+            android:layout_width="10dp"
+            android:layout_height="52dp"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/box_outline"
+            android:gravity="center"
+            android:text="30 days" />
+
+        <TextView
+            android:id="@+id/daysCount90"
+            android:layout_width="10dp"
+            android:layout_height="52dp"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/box_outline"
+            android:gravity="center"
+            android:text="90 days" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

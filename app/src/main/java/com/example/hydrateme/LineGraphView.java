@@ -69,9 +69,6 @@ public class LineGraphView extends View {
             }
         }
 
-        Log.d("Value Checker","Biggest value "+biggestValue);
-        Log.d("Value Checker","width = "+width+" height = "+height);
-
 
         Paint linePaint = new Paint();
         linePaint.setColor(Color.rgb(0, 114, 198));
@@ -102,7 +99,7 @@ public class LineGraphView extends View {
             float currentValue = (dataPoints.get(i) * adjustedHeight / biggestValue);
             float x = (startX + (i * adjustedWidth / dataSize));
     
-            Log.d("Value Checker","Value of Data: "+dataPoints.get(i)+" Offset: "+offset);
+            //Log.d("Value Checker","Value of Data: "+dataPoints.get(i)+" Offset: "+offset);
             if(dataPoints.get(i) == 0){
                 offset += 10;
             }else if(dataPoints.get(i) == biggestValue){
